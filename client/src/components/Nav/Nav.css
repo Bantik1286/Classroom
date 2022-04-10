@@ -1,0 +1,25 @@
+.nav-container{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 9rem;
+    background-color: rgb(73, 72, 72);
+    
+}
+.nav-title{
+    position: relative;
+    left: 2rem;
+    width: 20rem;
+    padding: 0.9rem;
+    color: rgb(247, 247, 247);
+    font-weight: bold;
+    font-size: 3.7rem;
+}
+.plus-icon{
+    /* border: 1px solid red; */
+    position: relative;
+    right: -110rem;
+    font-size: 5rem;
+    color: white;
+}

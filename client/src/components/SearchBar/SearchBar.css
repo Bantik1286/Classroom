@@ -1,0 +1,89 @@
+.search-container
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.search-bar
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 2rem;
+}
+#search
+{
+    width: 35%;
+    padding: 2rem;
+    border: 3px solid #ccc;
+    outline: none;
+    border-radius: 1rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin-right: 0.4rem; 
+   
+}
+#search:focus
+{
+    border: 3px solid rgb(163, 162, 162);
+}
+.button-container
+{
+    display: flex;
+    height: 5.5rem;
+    margin: auto 0px;
+}
+.loading{
+    display: flex;
+    align-items: center;
+}
+.button
+{
+    background-color: #50585f;
+    color: white;
+    width: 10rem;
+    font-size: 2rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    border: 1px solid #50585f;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.sp{
+    position: absolute;
+    left: 24%;
+    top:25%;
+    font-size: 20px;
+    font-weight: 500;
+    color: #515253;
+}
+.button:hover
+{
+    background-color: #50585fc2;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+.selectMenu{
+   
+    position: relative;
+    left: 2rem;
+    font-size: 2rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    background-color: #50585f;
+    border-radius: 1rem;
+    outline: none;
+    padding: 0.5rem;
+    height: 5.5rem;
+    display: flex;
+    margin: auto 0px;
+    color: white;
+    cursor: pointer;
+}
