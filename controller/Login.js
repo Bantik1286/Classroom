@@ -7,7 +7,7 @@ async function Login (req,res){
     const loginCredentials = JSON.parse(req.query[0])
     let data 
     try{
-        var user = await db.from('Users').select(`*`).match({Email:loginCredentials.email,Password:loginCredentials.password}).limit(1)
+        var user = await db.from('users').select(`*`).match({email:loginCredentials.email,password:loginCredentials.password}).limit(1)
         console.log(user)
     }
     catch(err){

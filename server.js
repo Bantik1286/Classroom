@@ -24,10 +24,12 @@ const PORT = process.env.PORT || 8000
 const server = http.createServer(app)
 
 
-const supabase = createClient('https://gdexnfbjauhkojfkrxvl.supabase.co',
-'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNTI0NzM5OSwiZXhwIjoxOTUwODIzMzk5fQ.NIWP_PrlawRYjBgANscmM4r2-zG_vPu8FaLjrydapK0'
+// const supabase = createClient('https://gdexnfbjauhkojfkrxvl.supabase.co',
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNTI0NzM5OSwiZXhwIjoxOTUwODIzMzk5fQ.NIWP_PrlawRYjBgANscmM4r2-zG_vPu8FaLjrydapK0'
+// )
+const supabase = createClient('https://yolzpmmrpcndcyzjsach.supabase.co',
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvbHpwbW1ycGNuZGN5empzYWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDkwODgyMjYsImV4cCI6MTk2NDY2NDIyNn0.Ncm7rippyFB21rOiNrFVsBByKRNDpn7iwnpYFbqzbI4'
 )
-
 
 global.supabase=supabase
 

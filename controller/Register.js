@@ -7,12 +7,12 @@ async function Register (req,res){
     const loginCredentials = JSON.parse(req.query[0])
     let data 
     try{
-        var user = await supabase.from('Users').insert(
+        var user = await supabase.from('users').insert(
             {
-                Email: loginCredentials.email,
-                First_Name: loginCredentials.fname,
-                Last_Name: loginCredentials.lname,
-                Password: loginCredentials.password,
+                email: loginCredentials.email,
+                first_name: loginCredentials.fname,
+                last_name: loginCredentials.lname,
+                password: loginCredentials.password,
             }
         );
         console.log(user)

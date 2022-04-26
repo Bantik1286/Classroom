@@ -2,7 +2,7 @@ import './SearchBar.css'
 import Nav from '../Nav/Nav';
 
 function SearchBar() {
-    
+    // email name classroom created by
   
     
     return (
