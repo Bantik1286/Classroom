@@ -87,3 +87,102 @@
     color: white;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+  
+   
+    .addItems{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        align-items: center;
+        left: 30%;
+        top: 10rem;
+        height: 55%;
+        background-color: rgb(255, 255, 255);
+        color: rgb(36, 35, 35);
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.8rem;
+        letter-spacing: 0.8px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        z-index: 5;
+        border-radius: 15px;
+        display: none;
+    }
+  
+    .itm-lbl{
+      position: relative;
+      margin-top: 3%;
+      font-size: larger;
+      font-weight: 300;
+      
+    }
+  
+    .itm-details{
+      
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 15%;
+      width: 60%;
+      left: 20%;
+    }
+  
+    .itm-input{
+      float: right;
+      width: 60%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: 1rem;
+      border: 3px solid #ccc;
+      outline: none;
+      border-radius: 1rem;
+      font-family: sans-serif;
+      font-weight: 400;
+      font-size: 2rem;
+      /* margin-right: 0.4rem;  */
+    }
+    .btn-lg{
+      width: 100%;
+    }
+    .bn{
+        background-color: #3cbd40; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bolder;
+        letter-spacing: 0.1rem;
+        border-radius: 5px;
+        margin-top: 5%;
+        position: relative;
+        float: right;
+    }
+    .cross{
+      position: absolute;
+      width: 5.2%;
+      display: flex;
+      justify-content: center ;
+      justify-items: center;
+      color: white;
+      background-color: rgb(250, 6, 6);
+      border-radius: 100%;
+      font-weight: bolder;
+      font-size: 2.3rem;
+      right: 2.5%;
+      top: 3%;
+      cursor: pointer;
+    }
+ 
+ 
