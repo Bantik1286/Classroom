@@ -2,27 +2,42 @@ import './SearchBar.css'
 import Nav from '../Nav/Nav';
 import {useState} from 'react'
 import axios from 'axios'
+import download from 'js-file-download'
 
 function SearchBar() {
     // data required: email name classroom created by 
     const [assignTitle , setAssignTitle] = useState('')
     const [assignDesc , setAssignDesc] = useState('')
-
+    const [assignDate, setAssignDate] = useState('')
     const [selectedFile, setSelectedFile] = useState('');
 
     async function handleSubmit(event:any) {
         // event.preventDefault()
-        // const id  = '72795f0a64dfb5f687aba26577ec64fd'
-        // const name = '19k-1365 lab#08.pdf'
+        // const id  = '6f30abc6f10d130a2eed918e497cd495'
+        // const name = '3.txt'
         // const filedata = JSON.stringify({id,name})
-        // const isSuccess = await axios.get('/api/download/file',{
+      
+        
+        // axios.get('/api/download/file',{
         //     params:filedata
         // })
-
+        // .then(
+        //     resp=>{
+        //         download(resp.data,name)
+        //     }
+        // )
+        console.log(assignTitle)
+        console.log(assignDate)
+        console.log(assignDesc)
         event.preventDefault()
         const formData = new FormData();
         formData.append("selectedFile", selectedFile);
         console.log('handle submit triggered')
+        formData.append("class_id","fklsdl32")
+        formData.append("end_date",assignDate)
+        formData.append("title",assignTitle)
+        formData.append("desc",assignDesc)
+
         try {
             const response = await axios({
             method: "post",
@@ -79,6 +94,11 @@ function SearchBar() {
                     <input className="itm-input" value={assignDesc} onChange={(e)=>{setAssignDesc(e.target.value)}}/>
                 </div>
                 
+                <div className="itm-lbl">
+                    <label >Deadline: </label>
+                    <input className="itm-input" type="date" onChange={(e)=>{setAssignDate(e.target.value)}}/>
+                </div>
+
                 <form onSubmit={handleSubmit}>
                     <input type="file" onChange={handleFileSelect}/>
                     <div className="button-container">
