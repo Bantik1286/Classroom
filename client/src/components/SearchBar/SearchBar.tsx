@@ -1,15 +1,69 @@
 import './SearchBar.css'
 import Nav from '../Nav/Nav';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import {useSelector,useDispatch} from 'react-redux'
 import axios from 'axios'
-import download from 'js-file-download'
+import { RootState } from '../../redux/store'
+
+import { GetAssignmentsAction } from '../../redux/actions/GetAssignmentsAction';
+import {useNavigate} from 'react-router-dom'
 
 function SearchBar() {
+
+    useEffect(() => {
+        // fetch all the assignments related to this classroom(for now fetching all the assignments of all classroom b/c classroom feature is not yet created)
+        fetchAssignments()
+        fetchAnnouncements()
+
+    }, [])
+
     // data required: email name classroom created by 
     const [assignTitle , setAssignTitle] = useState('')
     const [assignDesc , setAssignDesc] = useState('')
     const [assignDate, setAssignDate] = useState('')
-    const [selectedFile, setSelectedFile] = useState('');
+    const [selectedFile, setSelectedFile] = useState('')
+    const [announcement, setAnnouncement] = useState('')
+    // {class_id a_id(p key) email(f key) desc}
+    // let announcements:any = []
+    const [announcements,getAnnouncements] = useState([])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const loginDetails = useSelector((state:RootState)=>state.LoginReducer)
+    const assignmentDetails = useSelector((state:RootState)=>state.AssignmentReducer)
+    
+
+    async function fetchAnnouncements(){
+        const ann = await axios.get('/api/announcement')
+        getAnnouncements(ann.data)
+        console.log(announcements)
+    }
+
+    async function fetchAssignments(){
+        const assignments = await axios.get('/api/assignments')
+        console.log('fetching assignments')
+        console.log(assignments)
+        if(assignments.data){
+        
+            dispatch(GetAssignmentsAction(assignments.data))
+        }
+    }
+
+    function handleAssignment(assignment:any){
+        navigate('/assignment',{state:assignment})
+    }
+
+    async function postAnnouncement(){
+
+        const email = loginDetails.email 
+        console.log(loginDetails)
+        const announc = JSON.stringify({announcement,email})
+        console.log(announc)
+        const res = await axios.post('/api/announcement/post',{announc})
+        if(res.data){
+            getAnnouncements(res.data)
+        }
+
+    }
 
     async function handleSubmit(event:any) {
         // event.preventDefault()
@@ -58,16 +112,17 @@ function SearchBar() {
         let itmDiv:any = document.querySelector('.addItems')
         itmDiv.style.display = state
     }
+
     
     return (
         <div className="main-container">
             <Nav/>
             <div className="search-container">
                 <div className="search-bar">
-                    <input type="text"   placeholder="Announcement..." id="search"/>
+                    <input type="text"   placeholder="Announcement..." id="search" onChange={(e)=>setAnnouncement(e.target.value)}/>
                    
                         <div className="button-container">
-                            <button className="button" >Post</button>
+                            <button className="button" onClick={()=>{postAnnouncement()}}>Post</button>
                         </div>
 
                         {/* if user is creator of this classroom then upload button is shown */}
@@ -76,6 +131,37 @@ function SearchBar() {
                         </div>
                 </div>
 
+            </div>
+
+            <div className="announc-container">
+                {
+                    announcements.map((item:any)=><div className="announc-card">
+                    <div className="announc-details">
+                        
+                        <div>
+                            <span><b>{item.email}</b></span>
+                            
+                            {/* <span><b> {loginDetails.lname}</b></span> */}
+                            <br/>
+                            <span >{item.desc}</span>
+                        </div>
+      
+                    </div>
+                  
+                </div>)
+                }
+
+                    {
+                        assignmentDetails.map((assignment:any)=>
+                        <div className="announc-card" onClick={()=>handleAssignment(assignment)}>
+                            <div className="announc-details">
+                                <span><b>{assignment.title}</b></span>
+                
+                                <span >{assignment.desc}</span>
+                            </div>
+                        </div>
+                        )
+                    }      
             </div>
 
             <div className="addItems">
