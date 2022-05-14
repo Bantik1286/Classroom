@@ -8,6 +8,20 @@ function Nav() {
 
     const loginDetails = useSelector((state:RootState)=>state.LoginReducer)
     const dispatch = useDispatch()
+
+    async function joinClassRoom(){
+        const classcode = prompt("Enter classroom code: ")
+        if(classcode){
+            const email = loginDetails.email
+            const details = JSON.stringify({classcode,email})
+            const res = await axios.post('/api/classroom/join',{details})
+            if(res.data.success){
+                alert("Classroom joined successfully...")
+                dispatch(UpdateClassAction(res.data))
+            }
+        }
+    }
+
     async function createClassRoom(){
         
         let classname = prompt("Enter Class Name: ")
@@ -31,6 +45,7 @@ function Nav() {
                 Classroom
             </div>
             <div className="plus-icon" onClick={()=>{createClassRoom()}}>+</div>
+            <div className="bton" onClick={()=>{joinClassRoom()}}>Join</div>
         </div>
     )
 }
