@@ -1,11 +1,13 @@
 import {LoginReducer} from './reducers/LoginReducer'
 import {AssignmentReducer} from './reducers/AssignmentReducer'
+import {ClassReducer} from './reducers/ClassReducer'
 import {combineReducers,createStore} from 'redux'
 
 const rootReducer= combineReducers(
 {
     LoginReducer,
-    AssignmentReducer
+    AssignmentReducer,
+    ClassReducer
 }
 
 )
