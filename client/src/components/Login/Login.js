@@ -2,7 +2,8 @@ import { useState } from "react";
 import './styles.css';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import {useDispatch} from 'react-redux'
+import {LoginAction} from '../../redux/actions/LoginAction'
 
 function Login() {
 
@@ -10,6 +11,7 @@ function Login() {
     const [password, setPassword] = useState('');
     // const history = useHistory()
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function onEmail(event) {
         setEmail(event.target.value)
@@ -30,6 +32,10 @@ function Login() {
         })
         
         if(isSuccess.data.success){
+            const fname = isSuccess.data.first_name
+            const lname = isSuccess.data.last_name
+            const email = isSuccess.data.email
+            dispatch(LoginAction({fname,lname,email}))
             navigate("/class")
         }
         else{

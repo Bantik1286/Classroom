@@ -5,9 +5,14 @@ const handleLogin = require('./Routes/Login')
 const handleRegister = require('./Routes/Register')
 const handleUploadFile = require('./Routes/UploadFile')
 const handleDownloadFile = require('./Routes/DownloadFile')
+const handleAnnouncement = require('./Routes/Announcement')
+const handleAssignments = require('./Routes/Assignments')
+const handleSubmitAssignment = require('./Routes/SubmitAssignment')
+const handleGetSubmission = require('./Routes/GetSubmission')
+
 // const handleCafetarian = require('./Routes/Cafetarian')
 // const handleOrder = require('./Routes/Order')
-// const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 // const path = require('path')
 const {createClient} = require('@supabase/supabase-js')
 const http  = require("http")
@@ -18,7 +23,7 @@ const app = express()
 // app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 // app.use(express.static('./Client/build'))
 // app.use(cors())
 
@@ -45,7 +50,13 @@ server.listen(PORT,()=>{
 app.use('/api/login',handleLogin)
 app.use('/api/register',handleRegister)
 app.use('/api/upload/file',handleUploadFile)
+app.use('/api/upload/assignment',handleSubmitAssignment)
 app.use('/api/download/file',handleDownloadFile)
+app.use('/api/announcement',handleAnnouncement)
+app.use('/api/assignments',handleAssignments)
+app.use('/api/getSubmission',handleGetSubmission)
+
+
 // app.use('/api/Item',handleItem)
 // app.use('/api/Cafetarian',handleCafetarian)
 // app.use('/api/Order',handleOrder)

@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define vi vector<int>
+#define pi pair<int,int>
+#define f first
+#define s second
+#define pb push_back
+#define mp make_pair
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		ll a , b , n , m;
+		cin>>a>>b>>n>>m;
+		if(a+b<n+m){
+			cout<<"NO"<<"\n";
+			continue;
+		}
+		if(min(a,b)-m>=0&&(((a+b)-m)-n)>=0){
+			cout<<"YES"<<"\n";
+		}else{
+			cout<<"NO"<<"\n";
+		}
+		
+		
+	}	
+}

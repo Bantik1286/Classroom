@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './styles.css';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import {useDispatch} from 'react-redux'
+import {LoginAction} from '../../redux/actions/LoginAction'
 
 function Register() {
 
@@ -11,6 +12,7 @@ function Register() {
     const [fname, setfname] = useState('');
     const [lname, setlname] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function onEmail(event) {
         setEmail(event.target.value)
@@ -38,6 +40,7 @@ function Register() {
         
         if(isSuccess.data.success){
             navigate("/class")
+            dispatch(LoginAction({email,fname,lname}))
         }
         else{
             alert('Invalid Credentials...')

@@ -1,0 +1,77 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+.main{
+    display: flex;
+    flex-direction: row;
+}
+.assign-details-main{
+    /* border: 1px solid red; */
+    width: 40%;
+    height: 70vh;
+    position: relative;
+    margin-top: 5rem;
+    left: 10%;
+}
+.submission-details{
+    /* border: 1px solid blue; */
+    width: 40%;
+    margin-top: 5rem;
+    height: 70vh;
+    position: relative;
+    left: 13%;
+}
+.assign-details{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(99, 97, 97);
+    padding-left: 2rem;
+}
+.title{
+    font-weight: bolder;
+    font-size: 35px;
+    font-family: sans-serif;
+}
+.assign-details-file{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    
+    padding-left: 5rem;
+    padding-top: 3rem; 
+}
+.desc{
+    font-size: large;
+    color: rgb(80, 78, 78);
+   
+}
+.file{
+    font-size: larger;
+    color: rgb(80, 78, 78);
+}
+.deadline{
+    text-align: right;
+    padding-right: 5px;
+    
+}
+.s{
+    margin-left: 5rem;
+}
+.button-container
+{
+    display: flex;
+    height: 5.5rem;
+    margin: auto 0px;
+}
+.form{
+    /* border: 1px solid red; */
+    padding: 3rem;
+    position: relative;
+    top: 6rem;
+    left: 3rem;
+}
+.p{
+    margin-top: 1rem;
+}
