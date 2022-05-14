@@ -9,6 +9,7 @@ const handleAnnouncement = require('./Routes/Announcement')
 const handleAssignments = require('./Routes/Assignments')
 const handleSubmitAssignment = require('./Routes/SubmitAssignment')
 const handleGetSubmission = require('./Routes/GetSubmission')
+const handleClassroom = require('./Routes/Classroom')
 
 // const handleCafetarian = require('./Routes/Cafetarian')
 // const handleOrder = require('./Routes/Order')
@@ -55,7 +56,7 @@ app.use('/api/download/file',handleDownloadFile)
 app.use('/api/announcement',handleAnnouncement)
 app.use('/api/assignments',handleAssignments)
 app.use('/api/getSubmission',handleGetSubmission)
-
+app.use('/api/classroom',handleClassroom)
 
 // app.use('/api/Item',handleItem)
 // app.use('/api/Cafetarian',handleCafetarian)
