@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './styles.css';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import {LoginAction} from '../../redux/actions/LoginAction'
 
@@ -12,6 +12,7 @@ function Login() {
     // const history = useHistory()
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
 
     function onEmail(event) {
         setEmail(event.target.value)

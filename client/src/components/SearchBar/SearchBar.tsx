@@ -6,12 +6,13 @@ import axios from 'axios'
 import { RootState } from '../../redux/store'
 
 import { GetAssignmentsAction } from '../../redux/actions/GetAssignmentsAction';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useLocation} from 'react-router-dom'
 
 function SearchBar() {
 
     useEffect(() => {
         // fetch all the assignments related to this classroom(for now fetching all the assignments of all classroom b/c classroom feature is not yet created)
+     
         fetchAssignments()
         fetchAnnouncements()
 
@@ -28,6 +29,7 @@ function SearchBar() {
     const [announcements,getAnnouncements] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
     const loginDetails = useSelector((state:RootState)=>state.LoginReducer)
     const assignmentDetails = useSelector((state:RootState)=>state.AssignmentReducer)
     
@@ -108,6 +110,18 @@ function SearchBar() {
         setSelectedFile(event.target.files[0])
     }
 
+    async function assignChecker(){
+        let emm = prompt("Enter Email: ")
+        if(emm){
+            const class_id = location.state
+            const e = JSON.stringify({emm,class_id})
+            const res = await axios.put("/api/checker",{e})
+            if(res.data.success){
+                alert('Operation was successful')
+            }
+        }
+    }
+
     const ChangeItemDiv = (state:string) =>{
         let itmDiv:any = document.querySelector('.addItems')
         itmDiv.style.display = state
@@ -126,8 +140,12 @@ function SearchBar() {
                         </div>
 
                         {/* if user is creator of this classroom then upload button is shown */}
-                        <div className="button-container" onClick={()=>ChangeItemDiv("block")}>
+                        <div className="button-container bbt" onClick={()=>ChangeItemDiv("block")}>
                                 <button className="button" >Upload</button>
+                        </div>
+
+                        <div className="button-container bbt" onClick={()=>assignChecker()}>
+                                <button className="button" >Assign Checker</button>
                         </div>
                 </div>
 

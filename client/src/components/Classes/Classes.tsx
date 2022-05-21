@@ -1,5 +1,5 @@
 import './Classes.css'
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Nav from '../Nav/Nav';
 import {useSelector,useDispatch} from 'react-redux'
 import { RootState } from '../../redux/store'
@@ -12,8 +12,10 @@ function Classes(){
     const loginDetails = useSelector((state:RootState)=>state.LoginReducer)
     const classes = useSelector((state:RootState)=>state.ClassReducer)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(() => {
         fetchClasses()
+
     }, [])
 
     async function fetchClasses(){
@@ -27,19 +29,27 @@ function Classes(){
         }
     }
 
+    function Navv(class_id:any,role:any){
+        if(role=='ch'){
+            navigate('/checker',{state:class_id})
+        }else{
+            navigate('/searchbar',{state:class_id})
+        }
+    }
+
   return (
     <div className="classes">
         <Nav/>
 
         {
-            classes.map((item:any)=><Link to="/searchbar" className="classroom">
+            classes.map((item:any)=><div onClick={()=>Navv(item.class_id,item.role)} className="classroom">
                 <div >
                     <div className="class">
                         <span>{item.class_name}</span>
                         <span>{item.created_by}</span>
                     </div>
                 </div>
-            </Link>
+            </div>
             )
         }
 
