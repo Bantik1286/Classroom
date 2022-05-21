@@ -1,5 +1,5 @@
 import CheckerNav from '../Checker/CheckerNav'
-import {useLocation} from 'react-router-dom'
+import {useLocation,useNavigate} from 'react-router-dom'
 import {useEffect,useState} from 'react'
 import axios from 'axios'
 
@@ -7,6 +7,7 @@ export default function Submissions() {
     
     const location:any = useLocation()
     const [submissions,setSubmissions] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchSubmissions()
@@ -23,13 +24,17 @@ export default function Submissions() {
         }
     }
 
+    function submissionDetails(submission:any){
+        navigate('/submissionDetails',{state:submission})    
+    }
+
     return (
         <div>
             <CheckerNav/>
             <div className="announc-container">
                 {
                     submissions.map((submission:any)=>
-                    <div className="announc-card" >
+                    <div className="announc-card" onClick={()=>{submissionDetails(submission)}}>
                         <div className="announc-details">
                             <span><b>{submission.user_id}</b></span>
                             <br/>
