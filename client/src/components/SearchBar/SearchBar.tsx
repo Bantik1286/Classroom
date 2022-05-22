@@ -24,27 +24,33 @@ function SearchBar() {
     const [assignDate, setAssignDate] = useState('')
     const [selectedFile, setSelectedFile] = useState('')
     const [announcement, setAnnouncement] = useState('')
+    const [totalmarks, setTotalMarks] = useState('')
     // {class_id a_id(p key) email(f key) desc}
     // let announcements:any = []
     const [announcements,getAnnouncements] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const location = useLocation()
+    const location:any = useLocation()
     const loginDetails = useSelector((state:RootState)=>state.LoginReducer)
     const assignmentDetails = useSelector((state:RootState)=>state.AssignmentReducer)
     
 
     async function fetchAnnouncements(){
-        const ann = await axios.get('/api/announcement')
+        const id = location.state.class_id
+        const class_id = JSON.stringify({id})
+        const ann = await axios.get('/api/announcement',{params:class_id})
         getAnnouncements(ann.data)
         console.log(announcements)
     }
 
     async function fetchAssignments(){
-        const assignments = await axios.get('/api/assignments')
+        
+        const id = location.state.class_id
+        const class_id = JSON.stringify({id})
+        const assignments = await axios.get('/api/assignments',{params:class_id})
         console.log('fetching assignments')
         console.log(assignments)
-        if(assignments.data){
+        if(assignments.data.length>0){
         
             dispatch(GetAssignmentsAction(assignments.data))
         }
@@ -58,7 +64,8 @@ function SearchBar() {
 
         const email = loginDetails.email 
         console.log(loginDetails)
-        const announc = JSON.stringify({announcement,email})
+        const class_id = location.state.class_id
+        const announc = JSON.stringify({announcement,email,class_id})
         console.log(announc)
         const res = await axios.post('/api/announcement/post',{announc})
         if(res.data){
@@ -89,20 +96,26 @@ function SearchBar() {
         const formData = new FormData();
         formData.append("selectedFile", selectedFile);
         console.log('handle submit triggered')
-        formData.append("class_id","fklsdl32")
+        formData.append("class_id",location.state.class_id)
         formData.append("end_date",assignDate)
         formData.append("title",assignTitle)
         formData.append("desc",assignDesc)
-
+        formData.append("tot_marks",totalmarks)
+        let res:any
         try {
-            const response = await axios({
+             res = await axios({
             method: "post",
             url: "/api/upload/file",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
-        });
+        }
+        
+        )
         } catch(error) {
         console.log(error)
+        }
+        if(res.data.success){
+            alert('Assignment uploaded')
         }
     }
 
@@ -113,7 +126,7 @@ function SearchBar() {
     async function assignChecker(){
         let emm = prompt("Enter Email: ")
         if(emm){
-            const class_id = location.state
+            const class_id = location.state.class_id
             const e = JSON.stringify({emm,class_id})
             const res = await axios.put("/api/checker",{e})
             if(res.data.success){
@@ -140,13 +153,19 @@ function SearchBar() {
                         </div>
 
                         {/* if user is creator of this classroom then upload button is shown */}
-                        <div className="button-container bbt" onClick={()=>ChangeItemDiv("block")}>
-                                <button className="button" >Upload</button>
-                        </div>
+                        {
 
-                        <div className="button-container bbt" onClick={()=>assignChecker()}>
-                                <button className="button" >Assign Checker</button>
-                        </div>
+                            location.state.created_by==loginDetails.email?
+                            <div className="button-container bbt" onClick={()=>ChangeItemDiv("block")}>
+                                    <button className="button" >Upload</button>
+                            </div>:null
+                        }
+                        {
+                            location.state.created_by==loginDetails.email?
+                            <div className="button-container bbt" onClick={()=>assignChecker()}>
+                                    <button className="button" >Assign Checker</button>
+                            </div>:null
+                        }                      
                 </div>
 
             </div>
@@ -201,6 +220,11 @@ function SearchBar() {
                 <div className="itm-lbl">
                     <label >Deadline: </label>
                     <input className="itm-input" type="date" onChange={(e)=>{setAssignDate(e.target.value)}}/>
+                </div>
+
+                <div className="itm-lbl">
+                    <label >Total Marks: </label>
+                    <input className="itm-input" onChange={(e)=>{setTotalMarks(e.target.value)}}/>
                 </div>
 
                 <form onSubmit={handleSubmit}>

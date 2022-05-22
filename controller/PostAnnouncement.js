@@ -11,7 +11,8 @@ async function PostAnnouncement (req,res){
         var response = await supabase.from('announcement').insert(
             {
                 email:announc.email,
-                desc:announc.announcement
+                desc:announc.announcement,
+                class_id:announc.class_id
                 // classId remain null until classroom feature is not created
             }
         );

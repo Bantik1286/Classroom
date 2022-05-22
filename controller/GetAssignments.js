@@ -6,10 +6,10 @@ async function GetAssignments(req,res){
     // taking one connection from pool
     db = global.supabase
 
-    // const loginCredentials = JSON.parse(req.query[0])
+    const loginCredentials = JSON.parse(req.query[0])
     let data 
     try{
-        var assignments = await db.from('Assignment').select(`*`)
+        var assignments = await db.from('Assignment').select(`*`).match({class_id:loginCredentials.id})
         console.log(assignments)
     }
     catch(err){
@@ -20,8 +20,6 @@ async function GetAssignments(req,res){
     if(assignments.data.length>0){
         data = assignments.data
        console.log(data)
-    }else{
-        data = {'success':false}
     }
     console.log(data)
     res.send(data)

@@ -25,6 +25,8 @@ export default function Submissions() {
     }
 
     function submissionDetails(submission:any){
+        const tot_marks = location.state.tot_marks
+        submission = {...submission,tot_marks}
         navigate('/submissionDetails',{state:submission})    
     }
 

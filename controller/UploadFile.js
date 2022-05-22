@@ -1,6 +1,6 @@
 
 async function UploadFile (req,res){
-    
+    data = {}
     db = global.supabase
     console.log(req.files)
     try{
@@ -9,12 +9,15 @@ async function UploadFile (req,res){
                 title: req.body.title,
                 desc: req.body.desc,
                 // class_id: '325',
+                class_id:req.body.class_id,
                 file_name: req.files[0].originalname,
                 file_id: req.files[0].filename,
-                end_date: req.body.end_date
+                end_date: req.body.end_date,
+                tot_marks:req.body.tot_marks
             }
         );
         console.log(response)
+        data = {'success':true}
     }
     catch(err){
         console.log(err)
@@ -22,7 +25,7 @@ async function UploadFile (req,res){
     }
 
 
-    res.send({'success':true})
+    res.send(data)
 }
 
 module.exports=UploadFile

@@ -28,8 +28,9 @@ function Assignment() {
     async function fetchSubmission(){
 
         const e = loginDetails.email
+        const assign_id = location.state.assign_id
         console.log(e)
-        const email = JSON.stringify({e})
+        const email = JSON.stringify({e,assign_id})
         console.log('fetching submission')
         const res = await axios.get('/api/getSubmission',{
             params:email

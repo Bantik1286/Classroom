@@ -29,11 +29,11 @@ function Classes(){
         }
     }
 
-    function Navv(class_id:any,role:any){
+    function Navv(class_id:any,role:any,created_by:any){
         if(role=='ch'){
             navigate('/checker',{state:class_id})
         }else{
-            navigate('/searchbar',{state:class_id})
+            navigate('/searchbar',{state:{class_id,created_by}})
         }
     }
 
@@ -42,7 +42,7 @@ function Classes(){
         <Nav/>
 
         {
-            classes.map((item:any)=><div onClick={()=>Navv(item.class_id,item.role)} className="classroom">
+            classes.map((item:any)=><div onClick={()=>Navv(item.class_id,item.role,item.created_by)} className="classroom">
                 <div >
                     <div className="class">
                         <span>{item.class_name}</span>
