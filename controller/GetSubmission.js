@@ -1,3 +1,4 @@
+const e = require("express")
 
 async function GetSubmission(req,res){
 
@@ -7,7 +8,7 @@ async function GetSubmission(req,res){
 
     let data 
     try{
-        var submission = await db.from('submission').select(`*`).match({user_id:em.e}).limit(1)
+        var submission = await db.from('submission').select(`*`).match({user_id:em.e,assign_id:em.assign_id}).limit(1)
         console.log(submission)
     }
     catch(err){

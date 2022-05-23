@@ -6,10 +6,10 @@ async function GetAnnouncement(req,res){
     // taking one connection from pool
     db = global.supabase
 
-    // const loginCredentials = JSON.parse(req.query[0])
+    const loginCredentials = JSON.parse(req.query[0])
     let data = []
     try{
-        var announcements = await db.from('announcement').select(`*`)
+        var announcements = await db.from('announcement').select(`*`).match({class_id:loginCredentials.id})
         console.log(announcements)
     }
     catch(err){
