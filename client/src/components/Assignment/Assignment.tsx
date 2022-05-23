@@ -60,6 +60,11 @@ function Assignment() {
     async function handleSubmit(event:any) {
         
         event.preventDefault()
+        const end_date = location.state.end_date
+        const curr_date = new Date()
+        const deadline = new Date(end_date)
+        if(curr_date.getFullYear()<=deadline.getFullYear()&&curr_date.getMonth()<=deadline.getMonth()&&curr_date.getDate()<=deadline.getDate()){
+     
         const formData = new FormData();
         formData.append("selectedFile", selectedFile);
         console.log('handle submit triggered')
@@ -75,10 +80,14 @@ function Assignment() {
         });
             if(response.data.success){
                 alert("Assignment Submitted Successfully...")
+                setIsSubmitted(true)
             }
         } catch(error) {
         console.log(error)
         }
+    }else{
+        alert("Assignment could not be submitted after deadline....")
+    }
     }
 
     const handleFileSelect = (event:any) => {
@@ -110,7 +119,8 @@ function Assignment() {
                             <span>{submittedFileName}</span>
                             <span>submitted</span>
                         </div>:
-                            <form onSubmit={handleSubmit} className="form">
+
+                        <form onSubmit={handleSubmit} className="form">
                             <input type="file" onChange={handleFileSelect}/>
                             <div className="button-container">
                                 {/* <button className="button" >Upload</button> */}
